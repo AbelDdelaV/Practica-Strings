@@ -1,0 +1,392 @@
+//
+//  main.cpp
+//  AlgebraAbstracta.1
+//
+//  Created by Abel Dia.
+//  Copyright © 2020 Abel Dia. All rights reserved.
+//
+//  main.cpp           Xcode.
+#include <iostream>
+#include <string>
+#include <sstream> //Ejercicio 4
+#include <fstream>
+
+using namespace std;
+using std::ostringstream;
+
+//---------------FUNCIONES---------------
+
+//EJERCICIO 1
+void convertir(string str)
+{
+    char madrid;
+    
+    for ( int i=0; i < str.length(); i++){
+        madrid = str[i];
+        cout << madrid ;
+    }
+    cout << endl;
+}
+
+//EJERCICIO 3
+void mayuscula(string &p)
+{
+    for (int i=0; i<p.length(); i++)
+    {
+        p[i] = toupper(p[i]);
+    }
+}
+void minuscula(string &p)
+{
+    for (int i=0; i<p.length(); i++)
+    {
+        p[i] = tolower(p[i]);
+    }
+}
+void imprimir(string p)
+{
+    for (int i=0; i<p.length(); i++)
+    {
+        cout << p[i];
+    }
+}
+
+//EJERCICIO 4
+void concatenacion(int a, int b)
+{
+    ostringstream cadenaSalida;
+    cadenaSalida << a << b;
+    string c = cadenaSalida.str();
+    
+    cout << c << endl;
+}
+void concatenacionx2(int a, int b)
+{
+    ostringstream cadenaSalida2;
+    a *= 2;
+    b *= 2;
+    cadenaSalida2 << a << b;
+    string c2 = cadenaSalida2.str();
+    
+    cout << c2 << endl;
+}
+
+//EJERCICIO 6
+void convertir(string oracion, string cambio)
+{
+    cout << "ORIGINAL: " << oracion << endl;
+    
+    oracion.erase(3, 9);
+    oracion.replace(3, 0, cambio);
+    
+    cout << "CAMBIO: " << oracion << endl;
+}
+
+//EJERCICIO 8
+void iterador(string caden)
+{
+    //for ( int i=0; i <= caden.capacity(); i += caden.size() +1)
+    //{
+        string::const_iterator iterador = caden.begin();
+        while ( iterador != caden.end())
+        {
+            cout << "\n" << *iterador << endl;
+            iterador++;
+        }
+        cout << endl;
+        cin >> caden;
+     //}
+}
+
+//EJERCICIO 9
+void combinar(string str, string str2)
+{
+    if (str.size()%2 == 0)
+    {
+        str.replace(str.size()/2, 0, str2);
+        cout << str << endl;
+    }
+    else cout << "La primera palabra es erronea" << endl;
+}
+
+//EJERCICIO 11
+void lexicografia(string palabra1, string palabra2)
+{
+    int resultado = palabra1.compare( palabra2 );
+    
+    if ( resultado == 0)
+        cout << "\nAmbas palabras son equivalentes." << endl;
+    else
+    {
+        if ( resultado > 0)
+            cout << "La palabra lexicográficamente mayor es: " << palabra1 << endl;
+        else
+            cout << "La palabra lexicográficamente mayor es: " << palabra2 << endl;
+    }
+}
+//---------------MAIN---------------
+
+
+
+int main()
+
+{
+/*//EJERCICIO 1
+           
+
+    string str;
+    
+    cout << "Escriba una palabra: ";
+    cin >> str;
+    
+    convertir(str);
+
+//EJERCICIO 2
+ 
+ //Capacity = Tamaño de espacio asignado a una cadena.
+ //Size = Tamaño actual de una cadena.
+    
+    cout << "\n-------------------------------------------\n";
+
+//EJERCICIO 3
+
+    string palabra;
+    
+    cout << "Introduzca una palabra: ";
+    cin >> palabra;
+    cout << "\nPALABRA ORIGINAL: " << palabra << endl;
+    cout << "PALABRA EN MAYUSCULAS: ";
+    mayuscula(palabra);
+    imprimir(palabra);
+    cout << "\nPALABRA EN MINUSCULAS: ";
+    minuscula(palabra);
+    imprimir(palabra);
+    cout << "\n-------------------------------------------\n";
+
+//EJERCICIO 4
+
+    int a ;
+    int b ;
+    
+    cout << "Introduzca un número: ";
+    cin >> a;
+    cout << "Introduzca otro número: ";
+    cin >> b;
+    
+    concatenacion(a , b);
+    concatenacionx2(a , b);
+ 
+//EJERCICIO 5
+    
+    string a(1000, 'a');
+    cout << a << endl;
+    
+//EJERCICIO 6
+    
+    string oracion ("Yo desaprobe el curso de Algebra Abstracta");
+    string cambio ("aprobe");
+    
+    convertir( oracion, cambio);
+    
+//EJERCICIO 7
+  //NO FUNCIONA
+    string frase;
+    string Palabra;
+    int contador = 0;
+    double a = frase.size();
+    
+    cout << "Inserte una palabra: ";
+    cin >> Palabra;
+    cout << "Inserte frase: ";
+   // cin >> frase;
+
+    for ( int i = 0; i <= frase.capacity(); i += frase.length())
+    {
+        if ( frase[1] != ' ' )
+        {
+            if ( frase.size() != 0)
+            {
+                if ( Palabra != frase)
+                {
+                    cin >> frase;
+                }
+                else
+                {
+                    contador++;
+                    cin >> frase;
+                }
+            }
+            else
+            {
+                cout << "iter";
+                cin >> frase;
+            }
+        }
+        else
+            break;
+    }
+    //------
+    while ( a <= 10)
+    {
+        if ( frase == Palabra)
+        {
+            contador ++;
+            a += frase.size();
+            cin >> frase;
+            cout << "," << endl;
+        }
+        else
+            cin >> frase;
+            a += frase.size();
+            cout << "." << endl;
+        
+    }
+//_------------
+    for ( int i = 0; i <= 10; i += frase.size() + 1)
+    {
+        if ( frase == Palabra)
+        {
+            contador ++;
+            cin >> frase;
+            cout << ".";
+        }
+        else
+            cin >> frase;
+            cout << ",";
+        
+    }
+    cout << "Número de veces repetido: " << contador << endl;
+    
+*///EJERCICIO 8
+    
+    string caden;
+    
+    cout << "Ingrese la palabra: ";
+    getline(cin,caden);
+    
+    iterador(caden);
+    cout << "\nLongitud: " << caden.length() << endl;
+  
+/*//EJERCICIO 9
+    
+    string str;
+    string str2;
+    
+    cout << "Ingrese la primera y segunda palabra: " << endl;
+    cin >> str >> str2;
+    
+    combinar(str, str2);
+    
+//EJERCICIO 10
+    //NO funciona
+    string buscar1("hola me llamo pam y hola");
+    string buscar2("hola");
+    string buscar3("hey");
+
+    cout << "Ingrese una oración: " << endl;
+    cin >> buscar1;
+    cout << "Ingrese las palabras: ";
+    cin >> buscar2 >> buscar3;
+    
+    double posicion = buscar1.find(buscar2); //int
+    double tamaño = buscar2.length();
+    
+    while ( posicion != string::npos) //string::npos --> valor maximo
+    {
+        buscar1.replace( posicion, tamaño, buscar3);
+        posicion = buscar1.find( buscar2, posicion + 1);
+    }
+
+    cout << buscar1 << endl;
+    -----
+    string prueba;
+    
+    cout << "Inserte frase: ";
+    
+    for ( int i=0; i <= prueba.capacity(); i += prueba.size() +1)
+    {
+        cin >> prueba;
+        cout << " " << prueba;
+    }
+    cout << endl;
+    -----------------
+    string frase;
+    string buscar;
+    string ctrlV;
+    
+    cout << "Escriba la frase: ";
+    
+    for ( int i=0; i <= frase.capacity(); i += frase.size() +1)
+    {
+        cin >> frase;
+        cout << " " << frase ;
+    }
+    
+    cout << "Escriba la palabra comparable: ";
+    cin >> buscar;
+    cout << "Escriba la palabra a reemplazar";
+    cin >> ctrlV;
+    
+
+    //EJERCICIO 11
+    
+    string palabra1;
+    string palabra2;
+    
+    cout << "Ingrese una palabra: ";
+    cin >> palabra1;
+    cout << "Ingrese otra palabra: ";
+    cin >> palabra2;
+    
+    lexicografia(palabra1, palabra2);
+ 
+    //EJERCICIO 12 --> visualStudio
+ 
+    ofstream myfile;
+    string numeros;
+    myfile.open("numeros.txt");
+
+    cout << "Escriba 10 numeros: ";
+
+    for (int i = 0; i < 10; i++)
+    {
+        cin >> numeros;
+
+        if (numeros.size() <= 3)
+        {
+            myfile << numeros << endl;
+        }
+        else
+        {
+            cout << "Solo numeros del 1 al 1000";
+            return 0;
+        }
+    }
+    myfile.close();
+ 
+    //EJERCICIO 13 --> Visual Studio
+
+    string numeros;
+    int a;
+    int b = 0;
+    ifstream myfile("numeros.txt");
+
+    if (myfile.is_open())
+    {
+        while (getline(myfile, numeros))
+        {
+            a = stoi(numeros);
+            b += a;
+        }
+        myfile.close();
+    }
+    else
+    {
+        cout << "No se abrio";
+    }
+    cout << "La suma es: " << b;
+    
+    
+     
+    */
+}
